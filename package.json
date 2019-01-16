@@ -2,47 +2,29 @@
   "name": "cdk-serverless-example",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "services/*",
+    "frontend",
+    "scripts"
+  ],
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "cdk": "cdk",
+    "build": "lerna run build",
     "bootstrap": "cdk bootstrap",
-    "deploy": "node bin/auth0.js create && cdk deploy && node bin/auth0.js update",
-    "destroy": "cdk destroy",
-    "diff": "cdk diff",
-    "synth": "cdk synth",
-    "lint": "tslint 'lib/**/*.ts'",
-    "eslint": "eslint resources/**/*.js",
-    "prettier": "prettier --write lib/**/*.ts",
-    "prettier:ci": "prettier --list-different lib/**/*.ts"
+    "deploy:services": "lerna run deploy --scope 'services-*'",
+    "deploy:frontend": "lerna run deploy --scope 'frontend'",
+    "destroy": "lerna run destroy",
+    "lint": "lerna exec yarn lint",
+    "test": "lerna exec yarn test",
+    "prettier": "lerna exec yarn prettier",
+    "prettier:ci": "lerna exec yarn prettier:ci",
+    "auth0:create": "node scripts/auth0.js create",
+    "auth0:update": "node scripts/auth0.js update",
+    "env:sync": "node scripts/env.js sync",
+    "deploy:all": "yarn build && yarn auth0:create && yarn env:sync && yarn deploy:services && yarn deploy:frontend && yarn auth0:update"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.0",
-    "@types/fs-extra": "^5.0.4",
-    "@types/node": "^8.9.4",
-    "@types/request-promise-native": "^1.0.15",
-    "aws-cdk": "^0.21.0",
-    "eslint": "^5.12.0",
-    "eslint-config-prettier": "^3.3.0",
-    "prettier": "^1.15.3",
-    "tslint": "^5.12.0",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.1.2"
-  },
-  "dependencies": {
-    "@aws-cdk/aws-apigateway": "^0.22.0",
-    "@aws-cdk/aws-cloudfront": "^0.22.0",
-    "@aws-cdk/aws-iam": "^0.22.0",
-    "@aws-cdk/aws-lambda": "^0.22.0",
-    "@aws-cdk/aws-s3": "^0.22.0",
-    "@aws-cdk/aws-s3-deployment": "^0.22.0",
-    "@aws-cdk/cdk": "^0.22.0",
-    "aws-sdk": "^2.388.0",
-    "commander": "^2.19.0",
-    "dotenv": "^6.2.0",
-    "fs-extra": "^7.0.1",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.5"
+    "lerna": "^3.10.5",
+    "prettier": "^1.15.3"
   }
 }

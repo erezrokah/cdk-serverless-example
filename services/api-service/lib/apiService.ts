@@ -2,6 +2,7 @@ import apigateway = require('@aws-cdk/aws-apigateway');
 import iam = require('@aws-cdk/aws-iam');
 import lambda = require('@aws-cdk/aws-lambda');
 import cdk = require('@aws-cdk/cdk');
+import path = require('path');
 import { RestApi } from './types';
 
 // https://github.com/awslabs/aws-cdk/issues/906
@@ -49,6 +50,8 @@ const addCorsOptions = (apiResource: apigateway.IRestApiResource) => {
   ];
 };
 
+const resources = path.join('.', 'resources');
+
 export class ApiService extends cdk.Construct {
   constructor(parent: cdk.Construct, name: string) {
     super(parent, name);
@@ -57,7 +60,7 @@ export class ApiService extends cdk.Construct {
       this,
       'PrivateEndpointHandler',
       {
-        code: lambda.Code.directory('resources/api-service/private'),
+        code: lambda.Code.directory(path.join(resources, 'private')),
         handler: 'privateEndpointHandler.handler',
         runtime: lambda.Runtime.NodeJS810,
       },
@@ -67,7 +70,7 @@ export class ApiService extends cdk.Construct {
       this,
       'PublicEndpointHandler',
       {
-        code: lambda.Code.directory('resources/api-service/public'),
+        code: lambda.Code.directory(path.join(resources, 'public')),
         handler: 'publicEndpointHandler.handler',
         runtime: lambda.Runtime.NodeJS810,
       },
@@ -101,7 +104,7 @@ export class ApiService extends cdk.Construct {
 
     // create the custom auth lambda
     const authHandler = new lambda.Function(this, 'AuthHandler', {
-      code: lambda.Code.directory('resources/api-service/auth'),
+      code: lambda.Code.directory(path.join(resources, 'auth')),
       environment: {
         AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
         AUTH0_CLIENT_PUBLIC_KEY: process.env.AUTH0_CLIENT_PUBLIC_KEY,

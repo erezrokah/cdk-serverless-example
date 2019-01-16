@@ -1,0 +1,3 @@
+bin/*.js
+lib/*.js
+*.d.ts

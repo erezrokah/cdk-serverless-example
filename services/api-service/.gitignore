@@ -1,0 +1,5 @@
+bin/*.js
+lib/*.js
+*.d.ts
+
+public_key.pem

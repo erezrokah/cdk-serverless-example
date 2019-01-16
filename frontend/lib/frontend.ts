@@ -5,10 +5,10 @@ import cdk = require('@aws-cdk/cdk');
 import fs = require('fs-extra');
 import path = require('path');
 
-const frontend = path.join('.', 'resources', 'frontend');
+const frontend = path.join('.', 'resources');
 const frontendBuild = path.join(frontend, 'build');
 
-const buildApp = (apiUrl: string) => {
+const buildApp = () => {
   const frontendSrc = path.join(frontend, 'src');
   // copy src to build
   fs.removeSync(frontendBuild);
@@ -17,13 +17,16 @@ const buildApp = (apiUrl: string) => {
   // update app.js with relevant values
   const appJs = 'app.js';
   const content = fs.readFileSync(path.join(frontendBuild, appJs));
-  const { AUTH0_CLIENT_ID = '', AUTH0_DOMAIN = '' } = process.env;
-  console.log(AUTH0_CLIENT_ID, AUTH0_DOMAIN, apiUrl);
+  const {
+    AUTH0_CLIENT_ID = '',
+    AUTH0_DOMAIN = '',
+    ENDPOINT_URL = '',
+  } = process.env;
   const replaced = content
     .toString()
     .replace(/AUTH0_CLIENT_ID_VALUE/g, AUTH0_CLIENT_ID)
     .replace(/AUTH0_DOMAIN_VALUE/g, AUTH0_DOMAIN)
-    .replace(/ENDPOINT_URL/g, apiUrl);
+    .replace(/ENDPOINT_URL/g, ENDPOINT_URL);
 
   fs.writeFileSync(path.join(frontendBuild, appJs), replaced);
 };
@@ -32,7 +35,7 @@ export class SinglePageApp extends cdk.Construct {
   constructor(parent: cdk.Construct, name: string) {
     super(parent, name);
 
-    buildApp('apiUrl');
+    buildApp();
 
     const websiteBucket = new s3.Bucket(this, 'SinglePageAppBucket', {
       publicReadAccess: true,

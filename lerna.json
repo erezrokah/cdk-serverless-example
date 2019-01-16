@@ -1,0 +1,6 @@
+{
+  "version": "23.2.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": ["services/*", "frontend", "scripts"]
+}

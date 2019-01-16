@@ -1,0 +1,29 @@
+{
+  "name": "scripts",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint 'lib/**/*.ts'",
+    "prettier": "prettier --write lib/**/*.ts",
+    "prettier:ci": "prettier --list-different lib/**/*.ts"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/fs-extra": "^5.0.4",
+    "@types/node": "^8.9.4",
+    "@types/request-promise-native": "^1.0.15",
+    "aws-sdk": "^2.388.0",
+    "commander": "^2.19.0",
+    "dotenv": "^6.2.0",
+    "fs-extra": "^7.0.1",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.1.2"
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
+  }
+}

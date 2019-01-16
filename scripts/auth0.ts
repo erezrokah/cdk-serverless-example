@@ -1,17 +1,26 @@
 import program = require('commander');
 import * as dotenv from 'dotenv';
 import fs = require('fs-extra');
+import path = require('path');
 import request = require('request-promise-native');
-import { replaceInEnvFile } from './utils';
+import { getFrontendDomain } from './aws';
+import {
+  apiServiceDir,
+  apiServiceEnvFile,
+  frontendEnvFile,
+  getEnvs,
+  publicKeyFilename,
+  replaceInEnvFile,
+} from './env';
 
 dotenv.config();
 
 const {
-  AUTH0_CLIENT_ID = '',
-  AUTH0_DOMAIN = '',
-  AUTH0_MANAGEMNET_CLIENT_ID = '',
-  AUTH0_MANAGEMNET_CLIENT_SECRECT = '',
-} = process.env;
+  AUTH0_CLIENT_ID,
+  AUTH0_DOMAIN,
+  AUTH0_MANAGEMNET_CLIENT_ID,
+  AUTH0_MANAGEMNET_CLIENT_SECRECT,
+} = getEnvs();
 
 const checkManagementCreds = () => {
   if (
@@ -20,7 +29,7 @@ const checkManagementCreds = () => {
     !AUTH0_MANAGEMNET_CLIENT_SECRECT
   ) {
     throw new Error(
-      'Missing AUTH0_DOMAIN || AUTH0_MANAGEMNET_CLIENT_ID or AUTH0_MANAGEMNET_CLIENT_SECRECT',
+      'Missing AUTH0_DOMAIN || AUTH0_MANAGEMNET_CLIENT_ID || AUTH0_MANAGEMNET_CLIENT_SECRECT',
     );
   }
 };
@@ -42,7 +51,6 @@ const getAuthToken = async () => {
   return `${response.token_type} ${response.access_token}`;
 };
 
-const appName = 'Serverless Test App';
 const url = `https://${AUTH0_DOMAIN}/api/v2/clients`;
 const getServerlessApp = async (authorization: string) => {
   const response = JSON.parse(
@@ -71,7 +79,7 @@ export const createServerlessApp = async () => {
       await request({
         body: JSON.stringify({
           app_type: 'spa',
-          name: appName,
+          name: 'Serverless Test App',
           oidc_conformant: true,
         }),
         headers: { authorization, 'content-type': 'application/json' },
@@ -81,13 +89,20 @@ export const createServerlessApp = async () => {
     );
     const { client_id, signing_keys } = response;
     console.log('auth0 app created with client_id:', client_id);
-    const certfile = 'public_key.pem';
     await Promise.all([
       replaceInEnvFile('.env', {
         AUTH0_CLIENT_ID: response.client_id,
-        AUTH0_CLIENT_PUBLIC_KEY: certfile,
       }),
-      fs.writeFile(certfile, signing_keys[0].cert),
+      replaceInEnvFile(frontendEnvFile, {
+        AUTH0_CLIENT_ID: response.client_id,
+      }),
+      replaceInEnvFile(apiServiceEnvFile, {
+        AUTH0_CLIENT_ID: response.client_id,
+      }),
+      fs.writeFile(
+        path.join(apiServiceDir, publicKeyFilename),
+        signing_keys[0].cert,
+      ),
     ]);
   } else {
     console.log('auth0 serverless app exists, skipping creation');
@@ -99,16 +114,17 @@ export const updateServerlessApp = async () => {
   const authorization = await getAuthToken();
   const app = await getServerlessApp(authorization);
   if (app) {
+    const domain = await getFrontendDomain();
     // update callbacks and web origins
     const callbacks = [
       'http://localhost:3000/',
       'http://localhost:5000/',
-      'https://dx5y025s04hkr.cloudfront.net/',
+      `https://${domain}/`,
     ];
     const webOrigins = [
       'http://localhost:3000',
       'http://localhost:5000',
-      'https://dx5y025s04hkr.cloudfront.net',
+      `https://${domain}`,
     ];
     const response = JSON.parse(
       await request({
