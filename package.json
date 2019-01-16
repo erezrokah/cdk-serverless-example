@@ -21,7 +21,8 @@
     "auth0:create": "node scripts/auth0.js create",
     "auth0:update": "node scripts/auth0.js update",
     "env:sync": "node scripts/env.js sync",
-    "deploy:all": "yarn build && yarn auth0:create && yarn env:sync && yarn deploy:services && yarn deploy:frontend && yarn auth0:update"
+    "aws:invalidateCloudfrontCache": "node scripts/aws.js invalidateCloudfrontCache",
+    "deploy:all": "yarn build && yarn auth0:create && yarn env:sync && yarn deploy:services && yarn deploy:frontend && yarn auth0:update && yarn aws:invalidateCloudfrontCache"
   },
   "devDependencies": {
     "lerna": "^3.10.5",
