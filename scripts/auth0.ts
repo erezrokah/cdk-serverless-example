@@ -79,6 +79,9 @@ export const createServerlessApp = async () => {
       await request({
         body: JSON.stringify({
           app_type: 'spa',
+          jwt_configuration: {
+            alg: 'RS256',
+          },
           name: 'Serverless Test App',
           oidc_conformant: true,
         }),
