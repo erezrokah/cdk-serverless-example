@@ -1,5 +1,5 @@
 {
-  "name": "cdk-serverless-example-auth",
+  "name": "services-api-service-resources-auth",
   "version": "0.0.1",
   "description": "Custom auth lambda",
   "main": "authHandler.js",

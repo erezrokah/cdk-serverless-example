@@ -12,7 +12,8 @@
     "synth": "cdk synth",
     "lint": "tslint 'lib/**/*.ts'",
     "prettier": "prettier --write lib/**/*.ts",
-    "prettier:ci": "prettier --list-different lib/**/*.ts"
+    "prettier:ci": "prettier --list-different lib/**/*.ts",
+    "postinstall": "yarn --cwd ./resources/auth install"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
