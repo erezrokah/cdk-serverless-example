@@ -2,4 +2,4 @@
 
 - `yarn build` compile typescript to js
 - `yarn deploy:all` deploy all apps
-- `yarn destroy` delete app app
+- `yarn destroy` delete all apps
