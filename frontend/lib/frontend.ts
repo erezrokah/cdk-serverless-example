@@ -1,4 +1,5 @@
 import cloudfront = require('@aws-cdk/aws-cloudfront');
+import iam = require('@aws-cdk/aws-iam');
 import s3 = require('@aws-cdk/aws-s3');
 import s3Deploy = require('@aws-cdk/aws-s3-deployment');
 import cdk = require('@aws-cdk/cdk');
@@ -37,10 +38,17 @@ export class SinglePageApp extends cdk.Construct {
 
     buildApp();
 
+    const indexPage = 'index.html';
     const websiteBucket = new s3.Bucket(this, 'SinglePageAppBucket', {
       publicReadAccess: true,
-      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: indexPage,
+      websiteIndexDocument: indexPage,
     });
+    const statement = new iam.PolicyStatement()
+      .addActions('s3:ListBucket')
+      .addResource(websiteBucket.bucketArn)
+      .addPrincipal(new iam.Anyone());
+    websiteBucket.addToResourcePolicy(statement);
 
     new s3Deploy.BucketDeployment(this, 'DeploySinglePageApp', {
       destinationBucket: websiteBucket,
@@ -51,14 +59,36 @@ export class SinglePageApp extends cdk.Construct {
       this,
       'SinglePageAppDistribution',
       {
+        defaultRootObject: indexPage,
+        errorConfigurations: [
+          {
+            errorCode: 404,
+            responseCode: 200,
+            responsePagePath: '/' + indexPage,
+          },
+        ],
         originConfigs: [
           {
-            behaviors: [{ isDefaultBehavior: true }],
-            s3OriginSource: {
-              s3BucketSource: websiteBucket,
+            behaviors: [
+              {
+                allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
+                forwardedValues: {
+                  cookies: { forward: 'none' },
+                  queryString: false,
+                },
+                isDefaultBehavior: true,
+              },
+            ],
+            customOriginSource: {
+              domainName: `${websiteBucket.bucketName}.s3.amazonaws.com`,
+              httpPort: 80,
+              httpsPort: 443,
+              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HttpsOnly,
             },
           },
         ],
+        priceClass: cloudfront.PriceClass.PriceClassAll,
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.RedirectToHTTPS,
       },
     );
 
