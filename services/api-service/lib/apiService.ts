@@ -120,7 +120,7 @@ export class ApiService extends cdk.Construct {
     authHandler.grantInvoke(role);
 
     // connect auth lambda with api
-    const region = process.env.region || 'eu-west-1';
+    const region = process.env.region || 'us-east-1';
     const authorizerUri = `arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${
       authHandler.functionArn
     }/invocations`;
