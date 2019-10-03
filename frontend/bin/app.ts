@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 import * as dotenv from 'dotenv';
 import { getApiServiceEndpoint } from '../../scripts/aws';
 import { getEnvs } from '../../scripts/env';
@@ -18,5 +18,5 @@ getApiServiceEndpoint().then(endpointUrl => {
   new FrontendStack(app, `${stackNamePrefix}-${stage}`, {
     env: { region },
   });
-  app.run();
+  app.synth();
 });

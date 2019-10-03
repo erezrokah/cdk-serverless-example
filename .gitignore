@@ -3,4 +3,6 @@ node_modules
 
 .env
 
+**/cdk.out/**/*
+
 lerna-debug.log
