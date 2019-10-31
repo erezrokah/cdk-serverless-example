@@ -1,4 +1,4 @@
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 import apiService = require('../lib/apiService');
 
 export class ApiServiceStack extends cdk.Stack {

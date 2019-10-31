@@ -1,5 +1,5 @@
 import apigateway = require('@aws-cdk/aws-apigateway');
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 
 const stage = process.env.stage || 'dev';
 

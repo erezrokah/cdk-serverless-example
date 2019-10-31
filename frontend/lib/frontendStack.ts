@@ -1,4 +1,4 @@
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 import frontend = require('../lib/frontend');
 
 export class FrontendStack extends cdk.Stack {

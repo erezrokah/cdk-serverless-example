@@ -1,12 +1,12 @@
 import apigateway = require('@aws-cdk/aws-apigateway');
 import iam = require('@aws-cdk/aws-iam');
 import lambda = require('@aws-cdk/aws-lambda');
-import cdk = require('@aws-cdk/cdk');
+import cdk = require('@aws-cdk/core');
 import path = require('path');
 import { RestApi } from './types';
 
 // https://github.com/awslabs/aws-cdk/issues/906
-const addCorsOptions = (apiResource: apigateway.IRestApiResource) => {
+const addCorsOptions = (apiResource: apigateway.IResource) => {
   const method = apiResource.addMethod(
     'OPTIONS',
     new apigateway.MockIntegration({
@@ -24,7 +24,7 @@ const addCorsOptions = (apiResource: apigateway.IRestApiResource) => {
           statusCode: '200',
         },
       ],
-      passthroughBehavior: apigateway.PassthroughBehavior.Never,
+      passthroughBehavior: apigateway.PassthroughBehavior.NEVER,
       requestTemplates: {
         'application/json': '{"statusCode": 200}',
       },
@@ -34,7 +34,7 @@ const addCorsOptions = (apiResource: apigateway.IRestApiResource) => {
   const methodResource = method.node.findChild(
     'Resource',
   ) as apigateway.CfnMethod;
-  methodResource.propertyOverrides.methodResponses = [
+  methodResource.methodResponses = [
     {
       responseModels: {
         'application/json': 'Empty',
@@ -60,9 +60,9 @@ export class ApiService extends cdk.Construct {
       this,
       'PrivateEndpointHandler',
       {
-        code: lambda.Code.directory(path.join(resources, 'private')),
+        code: lambda.Code.fromAsset(path.join(resources, 'private')),
         handler: 'privateEndpointHandler.handler',
-        runtime: lambda.Runtime.NodeJS810,
+        runtime: lambda.Runtime.NODEJS_8_10,
       },
     );
 
@@ -70,9 +70,9 @@ export class ApiService extends cdk.Construct {
       this,
       'PublicEndpointHandler',
       {
-        code: lambda.Code.directory(path.join(resources, 'public')),
+        code: lambda.Code.fromAsset(path.join(resources, 'public')),
         handler: 'publicEndpointHandler.handler',
-        runtime: lambda.Runtime.NodeJS810,
+        runtime: lambda.Runtime.NODEJS_8_10,
       },
     );
 
@@ -104,13 +104,13 @@ export class ApiService extends cdk.Construct {
 
     // create the custom auth lambda
     const authHandler = new lambda.Function(this, 'AuthHandler', {
-      code: lambda.Code.directory(path.join(resources, 'auth')),
+      code: lambda.Code.fromAsset(path.join(resources, 'auth')),
       environment: {
-        AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
-        AUTH0_CLIENT_PUBLIC_KEY: process.env.AUTH0_CLIENT_PUBLIC_KEY,
+        AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID as string,
+        AUTH0_CLIENT_PUBLIC_KEY: process.env.AUTH0_CLIENT_PUBLIC_KEY as string,
       },
       handler: 'authHandler.handler',
-      runtime: lambda.Runtime.NodeJS810,
+      runtime: lambda.Runtime.NODEJS_8_10,
     });
 
     // create execution role for auth lambda
@@ -143,8 +143,10 @@ export class ApiService extends cdk.Construct {
       'POST',
       new apigateway.LambdaIntegration(privateEndpointHandler),
       {
-        authorizationType: apigateway.AuthorizationType.Custom,
-        authorizerId: authorizer.authorizerId,
+        authorizationType: apigateway.AuthorizationType.CUSTOM,
+        authorizer: {
+          authorizerId: authorizer.ref
+        }
       },
     );
 
