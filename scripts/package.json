@@ -11,13 +11,13 @@
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
-    "@types/fs-extra": "^5.0.4",
+    "@types/fs-extra": "^8.0.0",
     "@types/node": "^8.9.4",
     "@types/request-promise-native": "^1.0.15",
     "aws-sdk": "^2.388.0",
     "commander": "^4.0.0",
     "dotenv": "^8.0.0",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.0.0",
     "tslint": "^5.12.0",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.1.2"
