@@ -15,7 +15,7 @@
     "@types/node": "^8.9.4",
     "@types/request-promise-native": "^1.0.15",
     "aws-sdk": "^2.388.0",
-    "commander": "^4.0.0",
+    "commander": "^5.0.0",
     "dotenv": "^8.0.0",
     "fs-extra": "^8.0.0",
     "tslint": "^5.12.0",
