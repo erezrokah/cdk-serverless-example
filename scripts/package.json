@@ -10,7 +10,7 @@
     "prettier:ci": "prettier --list-different lib/**/*.ts"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.0",
+    "@types/dotenv": "^6.1.1",
     "@types/fs-extra": "^9.0.0",
     "@types/node": "^8.9.4",
     "@types/request-promise-native": "^1.0.15",
