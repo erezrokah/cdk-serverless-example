@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
-    "@types/fs-extra": "^9.0.0",
+    "@types/fs-extra": "^9.0.1",
     "@types/node": "^8.9.4",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.0.0",
