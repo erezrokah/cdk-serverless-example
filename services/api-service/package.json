@@ -20,7 +20,7 @@
     "@types/fs-extra": "^9.0.1",
     "@types/node": "^8.9.4",
     "eslint": "^7.0.0",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-prettier": "^7.0.0",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^4.0.0",
