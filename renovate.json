@@ -7,6 +7,7 @@
   "automerge": true,
   "labels": ["renovate"],
   "requiredStatusChecks": null,
+  "dependencyDashboard": true,
   "lockFileMaintenance": {
     "enabled": true
   },
