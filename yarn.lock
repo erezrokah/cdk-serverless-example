@@ -20,9 +20,7 @@
     constructs "^3.3.69"
 
 "@aws-cdk/aws-apigateway@^1.62.0":
-  version "1.191.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.191.0.tgz#30074a29624564b40f29bdb7a597c320f3bbc783"
-  integrity sha512-PF3+v0LZLISH9RXyCPwrUMLkAeO1slTkKbv4FjW8xC3LE3kIE5Q7sMIcphlnq4JrrM3HFYxgWS0ijndOKsYi6w==
+  version "1.192.0"
   dependencies:
     "@aws-cdk/aws-certificatemanager" "1.191.0"
     "@aws-cdk/aws-cloudwatch" "1.191.0"
@@ -311,9 +309,7 @@
     constructs "^3.3.69"
 
 "@aws-cdk/aws-s3-deployment@^1.62.0":
-  version "1.191.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-s3-deployment/-/aws-s3-deployment-1.191.0.tgz#09a564f0b7d52745fae3e7cabef456ce85b32c3d"
-  integrity sha512-rHR1kb78I1ncqHJjgadi/GRlnjjmUjmVKGN75STmLakvrcQd/AyeFbdsWVP8rfBHjiKGKd6sM/Ty0AEgIqErkw==
+  version "1.192.0"
   dependencies:
     "@aws-cdk/aws-cloudfront" "1.191.0"
     "@aws-cdk/aws-ec2" "1.191.0"
@@ -1656,11 +1652,7 @@ available-typed-arrays@^1.0.5:
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
 aws-cdk@^2.0.0:
-  version "2.63.2"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.63.2.tgz#9fd550eca936304e625d3e24fd4433525fb0d5a1"
-  integrity sha512-YtWfPTOiq+cgSIiM2IwjickvJgD1ESBWzK+0+yeauC3XwdaVcfNeTHF3sEqmc5DRMPKV8kAVBBxc0fmuoxcnBQ==
-  optionalDependencies:
-    fsevents "2.3.2"
+  version "2.64.0"
 
 aws-sdk@^2.388.0:
   version "2.1309.0"
