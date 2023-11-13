@@ -1512,9 +1512,9 @@
   integrity sha512-3YmXzzPAdOTVljVMkTMBdBEvlOLg2cDQaDhnnhT3nT9uDbnJzjWhKlzb+desT12Y7tGqaN6d+AbozcKzyL36Ng==
 
 "@types/request-promise-native@^1.0.17":
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/@types/request-promise-native/-/request-promise-native-1.0.20.tgz#c3f242eb4e7cb091f759679e9a8703f99b402d02"
-  integrity sha512-1dfdWY0u6mNkAheZ5UqBGY/ARpDXE5xJ+npN3COoTfrQTt4FmHrwp8548zU6F1LniUK75qk06HoOvCG+hS/8Zw==
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@types/request-promise-native/-/request-promise-native-1.0.21.tgz#9356d70b81475a29e4e20fd43c705a02c91a4332"
+  integrity sha512-NJ1M6iqWTEUT+qdP+OmXsRZ6tSdkoBdblHKatIWTVP1HdYpHU3IkfpLPf4MWb0+CC4Nl3TtLpYhDlhjZxytDIA==
   dependencies:
     "@types/request" "*"
 
