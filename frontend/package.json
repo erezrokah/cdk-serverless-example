@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
-    "@types/fs-extra": "^9.0.1",
+    "@types/fs-extra": "^11.0.0",
     "@types/node": "^20.0.0",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.17.0",
@@ -27,6 +27,6 @@
     "@aws-cdk/core": "^1.62.0",
     "aws-cdk": "^2.0.0",
     "dotenv": "^16.0.0",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^11.0.0"
   }
 }
