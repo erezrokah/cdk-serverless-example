@@ -15,7 +15,7 @@
     "prettier:ci": "prettier --list-different lib/**/*.ts"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.1",
+    "@types/dotenv": "^8.0.0",
     "@types/fs-extra": "^11.0.0",
     "@types/node": "^20.0.0",
     "tslint": "^6.0.0",
