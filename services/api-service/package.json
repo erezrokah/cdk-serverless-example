@@ -19,7 +19,7 @@
     "@types/dotenv": "^8.0.0",
     "@types/fs-extra": "^11.0.0",
     "@types/node": "^20.0.0",
-    "eslint": "^8.0.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.17.0",
