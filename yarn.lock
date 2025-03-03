@@ -1422,9 +1422,9 @@ available-typed-arrays@^1.0.7:
     possible-typed-array-names "^1.0.0"
 
 aws-cdk@^2.0.0:
-  version "2.1000.2"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1000.2.tgz#5c89404f24b09880bc9f7e9b4f7bd721be02b4bd"
-  integrity sha512-QsXqJhGWjHNqP7etgE3sHOTiDBXItmSKdFKgsm1qPMBabCMyFfmWZnEeUxfZ4sMaIoxvLpr3sqoWSNeLuUk4sg==
+  version "2.1001.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1001.0.tgz#35304c005f96497ffd5c95d2c2bde9553270b60d"
+  integrity sha512-Wp6fKNXcxBm+f8U1GkLV4gEgqq1pu5uwyDCMBg7ZB/6CtP+PsD/mPhuKyMULNWucDvYN8oy70XLOkMnxa3NWFw==
   optionalDependencies:
     fsevents "2.3.2"
 
