@@ -1420,9 +1420,9 @@ available-typed-arrays@^1.0.7:
     possible-typed-array-names "^1.0.0"
 
 aws-cdk@^2.0.0:
-  version "2.1112.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1112.0.tgz#d6093478750d696f394539d05d7dbdefb1e01ad7"
-  integrity sha512-IYUbsd9tpBQRqEO2evWsG+p2ZNa6wG5/sJvmWaqo45V1ep8BW+mrf+jEpFLD9uDPXqRA57EZGVGils7QLbOhNA==
+  version "2.1114.1"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1114.1.tgz#b2b48655e06b77f58902d07a29cfd9be2c2b70b2"
+  integrity sha512-jMaKPWQQs1G6AbhfCQG2zGrgAhTxzP0jn4T2CuwONuvcV374dMPhfC/LBAv48ruSOgpCK9x6V1xeO/aH3EchAA==
 
 aws-sdk@^2.388.0:
   version "2.1693.0"
